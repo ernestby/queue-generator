@@ -1,14 +1,14 @@
 <template>
-  <div class="dashboard">
-    <Sidebar class="dashboard__sidebar" />
-    <Header class="dashboard__header" />
-    <div class="dashboard__main"><slot /></div>
+  <div class="layout">
+    <Sidebar class="layout__sidebar" />
+    <Header class="layout__header" />
+    <div class="layout__main"><slot /></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Dashboard",
+  name: "MainLayout",
   components: {
     Sidebar: () => import("@/components/common/Sidebar"),
     Header: () => import("@/components/common/Header"),
@@ -17,7 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
+.layout {
   display: grid;
   grid-template-areas: "sidebar header" "sidebar main";
   max-width: 100%;

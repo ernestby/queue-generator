@@ -1,5 +1,5 @@
 <template>
-  <DashboardLayout>
+  <MainLayout>
     <div class="queue-handler">
       <div class="queue-handler__information">
         <div class="queue-handler__information-block">
@@ -32,7 +32,7 @@
         </button>
       </div>
     </div>
-  </DashboardLayout>
+  </MainLayout>
 </template>
 
 <script>

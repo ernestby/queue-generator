@@ -1,5 +1,5 @@
 <template>
-  <DashboardLayout>
+  <MainLayout>
     <div class="queue-generator">
       <button
         v-for="group in userGroups"
@@ -9,7 +9,7 @@
         {{ group.title }}
       </button>
     </div>
-  </DashboardLayout>
+  </MainLayout>
 </template>
 
 <script>

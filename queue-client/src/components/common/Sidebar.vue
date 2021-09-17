@@ -11,14 +11,10 @@
     </div>
     <ul class="sidebar__menu">
       <li>
-        <router-link :to="{ name: 'QueueHandler' }"
-          >Обработка очередей</router-link
-        >
+        <router-link :to="{ name: 'handler' }">Обработка очередей</router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'QueueGenerator' }"
-          >Получить очередь</router-link
-        >
+        <router-link :to="{ name: 'client' }">Получить очередь</router-link>
       </li>
     </ul>
     <button class="sidebar__logout">Выйти</button>

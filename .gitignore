@@ -1,0 +1,13 @@
+/queue-client/node_modules
+/queue-client/dist
+/queue-server/node_modules
+/queue-server/.env
+
+.DS_Store
+
+# .vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln/
+*.sw?
