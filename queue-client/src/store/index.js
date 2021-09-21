@@ -6,14 +6,18 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     activeQueues: [],
+    assignedQueues: [],
     assignedQueue: "",
     userGroups: [],
     currentUser: {},
+    queueList: [],
   },
   mutations: {
     setActiveQueues(state, payload) {
       state.activeQueues = payload;
-      console.log("payload", payload);
+    },
+    setAssignedQueues(state, payload) {
+      state.assignedQueues = payload;
     },
     setAssignedQueue(state, payload) {
       state.assignedQueue = payload;
@@ -29,6 +33,10 @@ export default new Vuex.Store({
     async getActiveQueues({ commit }, params) {
       const result = await Vue.$http.get("/get_active_queues/");
       commit("setActiveQueues", result.data);
+    },
+    async getAssignedQueues({ commit }, params) {
+      const result = await Vue.$http.get("/get_assigned_queues/");
+      commit("setAssignedQueues", result.data);
     },
     async getAssignedQueue({ commit }, params) {
       const result = await Vue.$http.get("/get_assigned_queue/", { params });
@@ -54,6 +62,10 @@ export default new Vuex.Store({
     async updateState({ commit }, params) {
       const result = await Vue.$http.put("/update_state/", { params });
       commit("setCurrentUser", result.data[0]);
+    },
+    async getQueueList({ commit }, params) {
+      const result = await Vue.$http.get("/get_queue_list/", { params });
+      commit("setQueueList", result.data[0]);
     },
   },
   modules: {},

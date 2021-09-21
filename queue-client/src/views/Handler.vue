@@ -106,24 +106,37 @@ export default {
       switch (type) {
         case "free":
           this.$store.dispatch("startServe", {
-            operatorId: this.currentUser.id,
-            groupId: this.currentUser.group_id,
+            operator: {
+              id: this.currentUser.id,
+              groupId: this.currentUser.group_id,
+              room: this.currentUser.room,
+            },
           });
           break;
         case "finish":
           this.$store.dispatch("finishCurrentQueue", {
-            groupId: this.currentUser.group_id,
-            operatorId: this.currentUser.id,
-            prefix: this.assignedQueue.prefix,
-            number: this.assignedQueue.number,
+            operator: {
+              id: this.currentUser.id,
+              groupId: this.currentUser.group_id,
+              room: this.currentUser.room,
+            },
+            queue: {
+              prefix: this.assignedQueue.prefix,
+              number: this.assignedQueue.number,
+            },
           });
           break;
         case "finish_with_break":
           this.$store.dispatch("finishCurrentQueue", {
-            groupId: this.currentUser.group_id,
-            operatorId: this.currentUser.id,
-            prefix: this.assignedQueue.prefix,
-            number: this.assignedQueue.number,
+            operator: {
+              id: this.currentUser.id,
+              groupId: this.currentUser.group_id,
+              room: this.currentUser.room,
+            },
+            queue: {
+              prefix: this.assignedQueue.prefix,
+              number: this.assignedQueue.number,
+            },
             break: true,
           });
           break;

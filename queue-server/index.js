@@ -56,6 +56,10 @@ app.get("/get_active_queues", (req, res) => {
   db.getActiveQueues().then((result) => res.send(result));
 });
 
+app.get("/get_assigned_queues", (req, res) => {
+  db.getAssignedQueues().then((result) => res.send(result));
+});
+
 app.get("/get_usergroups", (req, res) => {
   db.getUserGroups().then((result) => res.send(result));
 });
@@ -76,14 +80,16 @@ app.put("/update_state", (req, res) => {
 });
 
 app.post("/start_serve", (req, res) => {
-  db.getActiveQueueByGroupId(req.body.groupId)
+  const operator = req.body.operator;
+  console.log("operator", operator);
+  db.getActiveQueueByGroupId(operator.groupId)
     .then((result) => {
-      db.assignQueue(result[0], req.body.operatorId);
+      db.assignQueue(result[0], operator);
       db.deleteActiveQueueById(result[0].id);
-      db.updateOperatorState(req.body.operatorId, "busy");
+      db.updateOperatorState(operator.id, "busy");
     })
     .catch(() => {
-      db.updateOperatorState(req.body.operatorId, "free");
+      db.updateOperatorState(operator.id, "free");
     })
     .finally(() => {
       io.emit("update", {});
@@ -118,35 +124,39 @@ app.post("/generate_queue_number", (req, res) => {
 });
 
 app.post("/finish_current_queue", (req, res) => {
-  const operatorId = req.body.operatorId;
-  const groupId = req.body.groupId;
-  const prefix = req.body.prefix;
-  const number = req.body.number;
+  const operator = req.body.operator;
+  const queue = req.body.queue;
+
   const pause = req.body.break || false;
 
   // открепляем очередь от пользователя
-  db.deleteAssignedQueue(operatorId, number);
+  db.deleteAssignedQueue(operator.id, queue.number);
 
   if (pause) {
-    db.updateOperatorState(operatorId, "break");
+    db.updateOperatorState(operator.id, "break");
     io.emit("update", {});
   } else {
     // пытаемся найти новую очередь
-    db.getActiveQueueByGroupId(groupId)
+    db.getActiveQueueByGroupId(operator.groupId)
       .then((activeQueue) => {
-        db.assignQueue(activeQueue[0], operatorId);
+        console.log("naiden", activeQueue[0]);
+        db.assignQueue(activeQueue[0], operator);
         db.deleteActiveQueueById(activeQueue[0].id);
-        db.updateOperatorState(operatorId, "busy");
+        db.updateOperatorState(operator.id, "busy");
       })
       .catch(() => {
-        db.updateOperatorState(operatorId, "free");
+        db.updateOperatorState(operator.id, "free");
       })
       .finally(() => {
         io.emit("update", {});
       });
   }
   // добавляем очередь в таблицу завершенных
-  db.addToFinishedQueues({ prefix: prefix, number }, groupId, operatorId);
+  db.addToFinishedQueues(
+    { prefix: queue.prefix, number: queue.number },
+    operator.groupId,
+    operator.id
+  );
   res.send({});
 });
 

@@ -16,6 +16,9 @@
       <li>
         <router-link :to="{ name: 'client' }">Получить очередь</router-link>
       </li>
+      <li>
+        <router-link :to="{ name: 'list' }">Таблица очередей</router-link>
+      </li>
     </ul>
     <button class="sidebar__logout">Выйти</button>
   </div>

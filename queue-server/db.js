@@ -43,6 +43,17 @@ class Db {
     });
   }
 
+  getAssignedQueues() {
+    return new Promise((resolve, reject) => {
+      this.connection.query(
+        "SELECT * FROM queues_assigned",
+        function (err, results, fields) {
+          err ? reject(err) : resolve(results);
+        }
+      );
+    });
+  }
+
   getAssignedQueue(operatorId) {
     return new Promise((resolve, reject) => {
       this.connection.query(
@@ -85,9 +96,9 @@ class Db {
     });
   }
 
-  assignQueue(queue, operatorId) {
+  assignQueue(queue, operator) {
     this.connection.query(
-      `INSERT INTO queues_assigned (prefix, number, operator_id) VALUES('${queue.prefix}', '${queue.number}', '${operatorId}')`,
+      `INSERT INTO queues_assigned (prefix, number, operator_id, room) VALUES('${queue.prefix}', '${queue.number}', '${operator.id}', '${operator.room}')`,
       function (err, results, fields) {
         console.log("assignQueueErr", err);
         console.log("assignQueueResults", results);
@@ -159,6 +170,18 @@ class Db {
       this.connection.query(
         `SELECT * FROM queues_today WHERE group_id = '${groupId}' ORDER BY date_added DESC LIMIT 1`,
         function (err, results, fields) {
+          err ? reject(err) : resolve(results);
+        }
+      );
+    });
+  }
+
+  getQueueList() {
+    return new Promise((resolve, reject) => {
+      this.connection.query(
+        `SELECT * FROM queues_assigned LEFT JOIN queues_active`,
+        function (err, results, fields) {
+          console.log(results);
           err ? reject(err) : resolve(results);
         }
       );
