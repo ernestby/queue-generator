@@ -5,6 +5,11 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/Login.vue"),
+  },
+  {
     path: "/queue-handler",
     name: "handler",
     component: () => import("../views/Handler.vue"),
@@ -23,6 +28,7 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  mode: "history",
 });
 
 export default router;

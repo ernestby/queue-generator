@@ -1,0 +1,11 @@
+<template>
+  <EmptyLayout>login</EmptyLayout>
+</template>
+
+<script>
+export default {
+  name: "Login",
+};
+</script>
+
+<style lang="scss" scoped></style>

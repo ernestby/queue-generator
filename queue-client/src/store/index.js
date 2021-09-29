@@ -31,40 +31,40 @@ export default new Vuex.Store({
   },
   actions: {
     async getActiveQueues({ commit }, params) {
-      const result = await Vue.$http.get("/get_active_queues/");
+      const result = await Vue.$http.get("/queue/active_queues/");
       commit("setActiveQueues", result.data);
     },
     async getAssignedQueues({ commit }, params) {
-      const result = await Vue.$http.get("/get_assigned_queues/");
+      const result = await Vue.$http.get("/queue/assigned_queues/");
       commit("setAssignedQueues", result.data);
     },
     async getAssignedQueue({ commit }, params) {
-      const result = await Vue.$http.get("/get_assigned_queue/", { params });
+      const result = await Vue.$http.get("/queue/assigned_queue/", { params });
       commit("setAssignedQueue", result.data[0]);
     },
     async finishCurrentQueue({ commit }, params) {
-      const result = await Vue.$http.post("/finish_current_queue/", params);
+      const result = await Vue.$http.post("/queue/finish_queue/", params);
     },
     async generateQueueNumber({}, params) {
-      const result = await Vue.$http.post("/generate_queue_number/", params);
+      const result = await Vue.$http.post("/queue/generate_queue/", params);
     },
     async getUserGroups({ commit }) {
-      const result = await Vue.$http.get("/get_usergroups/");
+      const result = await Vue.$http.get("/queue/usergroups/");
       commit("setUserGroups", result.data);
     },
     async startServe({ commit }, params) {
-      const result = await Vue.$http.post("/start_serve/", params);
+      const result = await Vue.$http.post("/queue/start_serve/", params);
     },
     async getCurrentUser({ commit }, params) {
-      const result = await Vue.$http.get("/get_current_user/", { params });
+      const result = await Vue.$http.get("/queue/current_user/", { params });
       commit("setCurrentUser", result.data[0]);
     },
     async updateState({ commit }, params) {
-      const result = await Vue.$http.put("/update_state/", { params });
+      const result = await Vue.$http.put("/queue/update_state/", { params });
       commit("setCurrentUser", result.data[0]);
     },
     async getQueueList({ commit }, params) {
-      const result = await Vue.$http.get("/get_queue_list/", { params });
+      const result = await Vue.$http.get("/queue/queue_list/", { params });
       commit("setQueueList", result.data[0]);
     },
   },
