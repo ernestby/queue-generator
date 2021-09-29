@@ -122,7 +122,7 @@ class Db {
           if (results.length) {
             const freeUser = results[0];
 
-            that.assignQueue({ prefix: groupPrefix, number }, freeUser.id);
+            that.assignQueue({ prefix: groupPrefix, number }, freeUser);
             that.updateOperatorState(freeUser.id, "busy");
             db.query(
               `DELETE FROM queues_active WHERE number = '${number}'`,
