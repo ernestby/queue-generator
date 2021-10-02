@@ -24,7 +24,8 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["activeQueues", "assignedQueues"]),
+    ...mapState("auth", ["token"]),
+    ...mapState("queue", ["activeQueues", "assignedQueues"]),
   },
   sockets: {
     update() {
@@ -33,8 +34,8 @@ export default {
   },
   methods: {
     getQueues() {
-      this.$store.dispatch("getAssignedQueues");
-      this.$store.dispatch("getActiveQueues");
+      this.$store.dispatch("queue/getAssignedQueues");
+      this.$store.dispatch("queue/getActiveQueues");
     },
   },
   created() {

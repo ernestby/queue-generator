@@ -3,9 +3,12 @@ import App from "./App.vue";
 import VueAxios from "vue-axios";
 import axios from "./plugins/axios";
 import router from "./router";
+import Vuelidate from "vuelidate";
 import store from "./store";
 import MainLayout from "@/components/layouts/MainLayout";
 import EmptyLayout from "@/components/layouts/EmptyLayout";
+
+Vue.use(Vuelidate);
 
 import VueSocketIO from "vue-socket.io";
 

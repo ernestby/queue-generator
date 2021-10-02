@@ -63,7 +63,7 @@ export default {
     },
     // Fired when the server sends something on the "messageChannel" channel.
     update() {
-      this.$store.dispatch("getCurrentUser", { id: 2 });
+      this.$store.dispatch("queue/getCurrentUser");
       this.getData();
     },
   },
@@ -73,7 +73,8 @@ export default {
     },
   },
   computed: {
-    ...mapState(["activeQueues", "assignedQueue", "currentUser"]),
+    ...mapState("queue", ["activeQueues", "assignedQueue"]),
+    ...mapState("auth", ["currentUser"]),
     groupActiveQueues() {
       return this.activeQueues.filter((q) => q.group_id === 1).length || 0;
     },
@@ -105,7 +106,7 @@ export default {
     action(type) {
       switch (type) {
         case "free":
-          this.$store.dispatch("startServe", {
+          this.$store.dispatch("queue/startServe", {
             operator: {
               id: this.currentUser.id,
               groupId: this.currentUser.group_id,
@@ -114,7 +115,7 @@ export default {
           });
           break;
         case "finish":
-          this.$store.dispatch("finishCurrentQueue", {
+          this.$store.dispatch("queue/finishCurrentQueue", {
             operator: {
               id: this.currentUser.id,
               groupId: this.currentUser.group_id,
@@ -127,7 +128,7 @@ export default {
           });
           break;
         case "finish_with_break":
-          this.$store.dispatch("finishCurrentQueue", {
+          this.$store.dispatch("queue/finishCurrentQueue", {
             operator: {
               id: this.currentUser.id,
               groupId: this.currentUser.group_id,
@@ -141,7 +142,7 @@ export default {
           });
           break;
         case "break":
-          this.$store.dispatch("updateState", {
+          this.$store.dispatch("queue/updateState", {
             operatorId: this.currentUser.id,
             state: "break",
           });
@@ -152,19 +153,19 @@ export default {
       }
     },
     startServe() {
-      this.$store.commit("setCurrentUser", {
+      this.$store.commit("auth/setCurrentUser", {
         ...this.currentUser,
         state: "free",
       });
-      this.$store.dispatch("startServe", {
+      this.$store.dispatch("queue/startServe", {
         groupId: this.currentUser.group_id,
         operatorId: this.currentUser.id,
       });
     },
     finishCurrent() {},
     getData() {
-      this.$store.dispatch("getActiveQueues");
-      this.$store.dispatch("getAssignedQueue", {
+      this.$store.dispatch("queue/getActiveQueues");
+      this.$store.dispatch("queue/getAssignedQueue", {
         operatorId: this.currentUser.id,
       });
     },

@@ -123,3 +123,20 @@ button:hover {
     }
   }
 }
+
+.form-error {
+  color: red;
+  font-size: 11px;
+  margin-top: 5px;
+}
+
+.alert {
+  width: 100%;
+  padding: 15px;
+  border-radius: 3px;
+  color: white;
+}
+
+.alert-warning {
+  background: #ff9800;
+}

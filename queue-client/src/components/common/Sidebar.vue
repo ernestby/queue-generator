@@ -29,7 +29,7 @@ import { mapState } from "vuex";
 export default {
   name: "Sidebar",
   computed: {
-    ...mapState(["currentUser"]),
+    ...mapState("auth", ["currentUser"]),
   },
 };
 </script>

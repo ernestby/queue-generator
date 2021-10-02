@@ -20,11 +20,11 @@ export default {
   },
   methods: {
     queue(params) {
-      this.$store.dispatch("generateQueueNumber", params);
+      this.$store.dispatch("queue/generateQueueNumber", params);
     },
   },
   created() {
-    this.$store.dispatch("getUserGroups");
+    this.$store.dispatch("auth/getUserGroups");
   },
 };
 </script>

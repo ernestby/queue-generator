@@ -12,12 +12,13 @@ export default {
 
 <style lang="scss" scoped>
 .empty-layout {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr minmax(auto, 1150px) 1fr;
-
   &__content {
-    grid-column: 2/3;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>

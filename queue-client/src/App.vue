@@ -6,9 +6,7 @@
 
 <script>
 export default {
-  created() {
-    this.$store.dispatch("getCurrentUser", { id: 2 });
-  },
+  created() {},
 };
 </script>
 
