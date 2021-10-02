@@ -1,17 +1,6 @@
 import db from "../config/db";
 
 class Db {
-  getUserGroups() {
-    return new Promise((resolve, reject) => {
-      db.query(
-        "SELECT * FROM user_groups WHERE status = 'active'",
-        function (err, results, fields) {
-          err ? reject(err) : resolve(results);
-        }
-      );
-    });
-  }
-
   getActiveQueues() {
     return new Promise((resolve, reject) => {
       db.query("SELECT * FROM queues_active", function (err, results, fields) {
@@ -35,17 +24,6 @@ class Db {
     return new Promise((resolve, reject) => {
       db.query(
         `SELECT * FROM queues_assigned WHERE operator_id = '${operatorId}' LIMIT 1`,
-        function (err, results, fields) {
-          err ? reject(err) : resolve(results);
-        }
-      );
-    });
-  }
-
-  getCurrentUser(userId) {
-    return new Promise((resolve, reject) => {
-      db.query(
-        `SELECT * FROM users WHERE id = '${userId}'`,
         function (err, results, fields) {
           err ? reject(err) : resolve(results);
         }

@@ -14,18 +14,10 @@ class queue {
     db.getAssignedQueues().then((result) => res.send(result));
   }
 
-  getUsergroups(req, res) {
-    db.getUserGroups().then((result) => res.send(result));
-  }
-
   getAssignedQueue(req, res) {
     db.getAssignedQueue(req.query.operatorId).then((result) =>
       res.send(result)
     );
-  }
-
-  getCurrentUser(req, res) {
-    db.getCurrentUser(req.query.id).then((result) => res.send(result));
   }
 
   updateState(req, res) {
