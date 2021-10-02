@@ -1,5 +1,3 @@
 # queue-generator
 
-backend - node.js
-
-frontend - vue.js
+Simplest queue manager for service sector as banks, shops etc.
