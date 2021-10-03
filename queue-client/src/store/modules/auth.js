@@ -19,6 +19,9 @@ export default {
     setUserGroups(state, payload) {
       state.userGroups = payload;
     },
+    setToken(state, payload) {
+      state.token = payload;
+    },
   },
   actions: {
     async register({ commit }, params) {
@@ -26,7 +29,9 @@ export default {
     },
     async login({ commit }, params) {
       const result = await Vue.$http.post("/auth/login/", params);
-      setToken("Bearer " + result.data.token);
+      const token = "Bearer " + result.data.token;
+      commit("setToken", token);
+      setToken(token);
     },
     async getCurrentUser({ commit }, params) {
       const result = await Vue.$http.get("/auth/current_user/", { params });

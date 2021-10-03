@@ -44,15 +44,9 @@ router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   if (requiresAuth) {
     if (store.state.auth.token) {
-      try {
-        await store.dispatch("auth/getCurrentUser");
-        return next();
-      } catch (e) {
-        console.error(e);
-      }
+      return next();
     }
 
-    // console.log('redirect to login')
     return next({
       name: "login",
       query: {
@@ -60,7 +54,9 @@ router.beforeEach(async (to, from, next) => {
       },
     });
   }
-
+  if (store.state.auth.token) {
+    await store.dispatch("auth/getCurrentUser");
+  }
   next();
 });
 

@@ -1,5 +1,5 @@
 <template>
-  <EmptyLayout>
+  <ListLayout>
     <h1>Электронная очередь</h1>
     <div class="list">
       <div class="list__header">
@@ -17,14 +17,14 @@
         <div class="list__room">-</div>
       </div>
     </div>
-  </EmptyLayout>
+  </ListLayout>
 </template>
 
 <script>
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState("auth", ["token"]),
+    ...mapState("auth", ["token", "currentUser"]),
     ...mapState("queue", ["activeQueues", "assignedQueues"]),
   },
   sockets: {
@@ -54,6 +54,7 @@ h1 {
   margin-top: 50px;
   background: white;
   padding: 35px;
+  width: 80%;
 
   &__header {
     display: flex;

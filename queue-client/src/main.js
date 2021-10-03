@@ -6,7 +6,8 @@ import router from "./router";
 import Vuelidate from "vuelidate";
 import store from "./store";
 import MainLayout from "@/components/layouts/MainLayout";
-import EmptyLayout from "@/components/layouts/EmptyLayout";
+import AuthLayout from "@/components/layouts/AuthLayout";
+import ListLayout from "@/components/layouts/ListLayout";
 
 Vue.use(Vuelidate);
 
@@ -29,7 +30,8 @@ Vue.use(
 // Vue.use(VueSocketIO, SocketInstance);
 
 Vue.component("MainLayout", MainLayout);
-Vue.component("EmptyLayout", EmptyLayout);
+Vue.component("AuthLayout", AuthLayout);
+Vue.component("ListLayout", ListLayout);
 Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
