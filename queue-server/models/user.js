@@ -15,7 +15,7 @@ class User {
   getCurrentUser(userId) {
     return new Promise((resolve, reject) => {
       db.query(
-        `SELECT * FROM users WHERE id = '${userId}'`,
+        `SELECT u.id, u.fullname, u.username, u.status, u.state, u.room, g.is_admin, g.title as group_title FROM users u LEFT JOIN user_groups g ON (g.id = u.group_id) WHERE u.id = '${userId}'`,
         function (err, results, fields) {
           err ? reject(err) : resolve(results);
         }
