@@ -1,5 +1,5 @@
 <template>
-  <EmptyLayout>
+  <AuthLayout>
     <div class="registration">
       <h1>Регистрация</h1>
       <div v-if="errorMessage" class="registration__alert alert alert-warning">
@@ -55,7 +55,7 @@
       </div>
       <Button :callback="() => submitHandler()" text="Регистрация" />
     </div>
-  </EmptyLayout>
+  </AuthLayout>
 </template>
 
 <script>

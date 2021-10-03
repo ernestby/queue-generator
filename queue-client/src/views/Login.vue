@@ -1,5 +1,5 @@
 <template>
-  <EmptyLayout>
+  <AuthLayout>
     <div class="login">
       <h1>Авторизация</h1>
       <div v-if="errorMessage" class="login__alert alert alert-warning">
@@ -30,7 +30,7 @@
       </div>
       <Button :callback="() => submitHandler()" text="Войти" />
     </div>
-  </EmptyLayout>
+  </AuthLayout>
 </template>
 
 <script>
@@ -61,8 +61,9 @@ export default {
           username: this.username,
           password: this.password,
         });
+        this.$store.dispatch("auth/getCurrentUser");
         this.$router.push({
-          name: "list",
+          path: "/",
         });
       } catch (e) {
         this.errorMessage = e.response.data.message;
